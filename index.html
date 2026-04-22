@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="i18n-title">高端利率计算器 | Interest Calculator</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-wrapper">
+        <!-- Header -->
+        <header class="calc-header">
+            <div class="lang-selector">
+                <select id="langSwitch">
+                    <option value="zh">中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+            <h1 id="i18n-h1">财富增长模拟器</h1>
+            <p id="i18n-p">专业的单利与复利计算工具，洞见时间的力量。</p>
+        </header>
+
+        <main class="calc-main">
+            <!-- Left Panel: Controls -->
+            <section class="calc-controls panel-glass">
+                <div class="input-group">
+                    <label for="principal" id="i18n-principal">起始本金 (P)</label>
+                    <div class="input-with-icon">
+                        <span class="currency-icon" id="currency-icon-1">¥</span>
+                        <input type="number" id="principal" value="10000" min="0" step="1000">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="rate" id="i18n-rate">年化利率 (r)</label>
+                    <div class="input-with-icon">
+                        <input type="number" id="rate" value="5" min="0" step="0.1" max="100">
+                        <span class="currency-icon">%</span>
+                    </div>
+                    <input type="range" id="rateSlider" value="5" min="0" max="100" step="0.1" class="slider">
+                </div>
+
+                <div class="input-group">
+                    <label for="years" id="i18n-years">投资期限 (t)</label>
+                    <div class="input-with-icon">
+                        <input type="number" id="years" value="10" min="1" max="50" step="1">
+                        <span class="currency-icon" id="i18n-yearIcon">年</span>
+                    </div>
+                    <input type="range" id="yearSlider" value="10" min="1" max="50" step="1" class="slider">
+                </div>
+
+                <div class="input-group">
+                    <label id="i18n-interestType">计息方式</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="interestType" value="simple">
+                            <span class="radio-custom" id="i18n-simple">单利</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="interestType" value="compound" checked>
+                            <span class="radio-custom" id="i18n-compound">复利</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group" id="frequencyGroup">
+                    <label for="frequency" id="i18n-frequency">复利频率 (n)</label>
+                    <select id="frequency">
+                        <option value="1" id="i18n-annually" selected>每年 (Annually)</option>
+                        <option value="2" id="i18n-semiAnnually">每半年 (Semi-annually)</option>
+                        <option value="4" id="i18n-quarterly">每季度 (Quarterly)</option>
+                        <option value="12" id="i18n-monthly">每月 (Monthly)</option>
+                        <option value="365" id="i18n-daily">每天 (Daily)</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results & Chart -->
+            <section class="calc-results panel-glass">
+                <div class="summary-cards">
+                    <div class="summary-card total-amount-card">
+                        <h3 id="i18n-amount">期末总金额</h3>
+                        <p class="amount-value" id="totalAmount">¥0.00</p>
+                    </div>
+                    <div class="summary-card total-interest-card">
+                        <h3 id="i18n-interest">累计赚取利息</h3>
+                        <p class="amount-value highlight" id="totalInterest">¥0.00</p>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
